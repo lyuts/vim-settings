@@ -1,0 +1,122 @@
+noremap // :call CommentBlock()<CR>
+noremap ` :NERDTreeFind <CR> :set mouse=a <CR>
+
+let g:C_f_cmd = "find . -type f -iwholename '*INPUT*' | egrep -v \"(svn|~)\""
+"map <C-f> :call ExecSearch(substitute(g:C_f_cmd, "INPUT", input("File to find => "), "g"), "", "%f")<CR>
+
+noremap <S-F1> :execute "".input("")<CR>
+noremap <F1> :echo "F1 - help\nF2 - MarksBrowser\nF3 - Rgrep\nF4 - HexView\nF5 - man\nF6 - Cscope\nF7 - filencoding\nF8 - RotateEnc\nF9 - make\nF10 - line_num\nF11 - find file"<CR>
+
+nnoremap <silent> <F2> :call ToggleHLMark(g:markHLName)<CR>
+nnoremap <silent> <S-F2> :MarksBrowser<CR>
+nnoremap <silent> <S-A-F2> :call clearmatches()<CR>
+
+
+"nnoremap <F3> :Rgrep -I<CR>
+"nnoremap <S-F3> :Rgrep -iI<CR>
+
+nnoremap <F3> :call VDEGrepProjectFiles(input("Search for => ", expand("<cword>")), 1)<CR>
+nnoremap <S-F3> :call VDEGrepProjectFiles(input("Search for => ", expand("<cword>")), 0)<CR>
+
+"command! StripProjectRoot :setlocal modifiable<CR>:execute ":%s#^".GetProjectParamByFile(expand("%:h"), "Path")."/##g"<CR>:setlocal nomodifiable<CR>
+
+nnoremap <F4> :call HexView()<CR>
+nnoremap <S-F4> :A<CR>
+
+nnoremap <F5> :call ExecSearch("gid -r ".input("Pattern: ", expand("<cword>")), "", "")<CR>
+
+nnoremap <F6> :cs find s <C-R>=expand("<cword>")<CR><CR>
+
+nnoremap <F7> :let &fileencoding=&encoding<CR>
+
+nnoremap <F8> :call RotateEnc()<CR>
+
+nnoremap <F9> :echo "Shortcut is not used!"<CR>
+"""
+"nnoremap <F9> :write<CR>:make<CR>
+
+"nnoremap <F9> :execute RunMake()<CR><C-l><CR>
+""""
+nnoremap <F10> :echo "Shortcut is not used!"<CR>
+"nnoremap <F10> :%s/^/\=line('.').' '/<CR>
+"nnoremap <F10> :let t=expand("<cword>")<CR>:execute ":".line(".")."s/".t."/".strftime('%b %d %Y', t)."/"<CR>
+
+"nnoremap <F11> :echo "Not used!"<CR>
+nnoremap <F11> :call ExecSearch(substitute(g:C_f_cmd, "INPUT", input("File to find => "), "g"), "", "%f")<CR>
+
+"nnoremap <F12> :execute Run()<CR>
+
+" Folding: {{{
+nnoremap <C-Left> :set foldenable<CR>:set foldmethod=manual<CR>[{jv]}k:fold<CR>
+nnoremap <C-Right> zo
+
+" Window resizing: {{{
+nnoremap <C-M-Up> :resize -1<CR>
+nnoremap <C-M-Down> :resize +1<CR>
+nnoremap <C-M-Left> :vertical resize -1<CR>
+nnoremap <C-M-Right> :vertical resize +1<CR>
+"}}}
+
+
+
+"""""""""""
+""" VIMDIFF
+"""""""""""
+if v:progname =~? "vimdiff"
+    map <F1> :echo "F1 - help\nF2 - MarksBrowser\nF3 - Rgrep\nF4 - HexView\nF5 - man\nF6 - DiffPut\nF7 - DiffGet\nF8 - RotateEnc\nF9 - make\nF10 - line_num\n"<CR>
+    map <F6> :DiffPut<CR>
+    map <F7> :DiffGet<CR>
+""""""""
+""" GVIM
+""""""""
+elseif v:progname =~? "gvim"
+    """"""""
+    """ MAPS
+    """"""""
+    map <C-Tab> :call BufferList()<CR>
+
+    """ Alt + <Num>
+    map <A-0> :NERDTreeToggle .<CR>
+    map <A-1> :execute ShowMakeResults()<CR><C-l>
+    "map <A-2> :TlistToggle<CR>:TlistAddFilesRecursive . *.{cpp,c,C,h,hpp,cc,cxx}<CR>
+"    map <A-2> :TlistToggle<CR>:TlistAddFiles %<CR>
+    map <A-2> :TagbarToggle<CR>
+    map <A-3> :echo "Shortcut is not used!"<CR>
+    map <A-4> :echo "Shortcut is not used!"<CR>
+    map <A-5> :echo "Shortcut is not used!"<CR>
+    map <A-6> :echo "Shortcut is not used!"<CR>
+    map <A-7> :echo "Shortcut is not used!"<CR>
+    map <A-8> :echo "Shortcut is not used!"<CR>
+    map <A-9> :echo "Shortcut is not used!"<CR>
+
+"    let g:vimim_ctrl_space_to_toggle = 0
+    imap <C-Space> <C-X><C-O>
+    " Open new tab
+    map <C-t> :tabnew <CR>
+    imap <C-t> <ESC>:tabnew <CR>
+
+"""""""
+""" VIM
+"""""""
+elseif v:progname =~? "vim"
+    """"""""
+    """ MAPS
+    """"""""
+    " Ctrl + Tab
+    map <C-I> :call BufferList()<CR>
+    """ Alt + <Num>
+    map 0 :NERDTreeToggle .<CR>
+    map 1 :execute ShowMakeResults()<CR><C-l>
+    "map 2 :TlistToggle<CR>:TlistAddFilesRecursive . *.{cpp,c,C,h,hpp,cc,cxx}<CR>
+"    map 2 :TlistToggle<CR>:TlistAddFiles %<CR>
+    map 2 :TagbarToggle<CR>
+    map 3 :echo "Shortcut is not used!"<CR>
+    map 4 :silent call ExecSearch("cat tags.files \| xargs egrep -nIi '\\\\\(todo\|fixme\|bug\|warning\)' --include '*'", "", "")<CR><Up><CR>
+    map 5 :echo "Shortcut is not used!"<CR>
+    map 6 :echo "Shortcut is not used!"<CR>
+    map 7 :echo "Shortcut is not used!"<CR>
+    map 8 :echo "Shortcut is not used!"<CR>
+    map 9 :echo "Shortcut is not used!"<CR>
+
+"    noremap <C-/> :Search<Space>
+endif

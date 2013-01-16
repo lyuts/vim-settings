@@ -1,7 +1,7 @@
 if has("autocmd")
     augroup FtSetupGrp
         au!
-        au BufEnter * call PerformFtSpecificSetup(&ft)
+        au BufRead * call PerformFtSpecificSetup(&ft)
     augroup END
 
     augroup WhiteSpaceGrp

@@ -100,7 +100,7 @@ let g:pathogen_disabled += [ 'vim-yankstack.git' ]
 let g:pathogen_disabled += [ 'xml' ]
 "let g:pathogen_disabled += [ 'ZoomWin.git' ]
 
-call pathogen#infect()
+call pathogen#infect('config/{}', 'bundle/{}')
 "}}} pathogen
 
 " Shortcuts: {{{

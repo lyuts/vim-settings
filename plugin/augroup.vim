@@ -1,9 +1,4 @@
 if has("autocmd")
-    augroup FtSetupGrp
-        au!
-        au BufRead * call PerformFtSpecificSetup(&ft)
-    augroup END
-
     augroup WhiteSpaceGrp
         au!
         highlight RedundantWhitespace ctermbg=red guibg=red

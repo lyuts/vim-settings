@@ -23,7 +23,7 @@ if has("autocmd")
         " disable line width limit for non source code files
         au BufEnter,WinEnter,BufReadPost * if index(['sh', ''], &ft) != -1 | set textwidth=0 | else | set textwidth=80
 
-        au BufEnter * call HLMarks(g:markHLName)
+        au BufEnter * call HLMarks()
     augroup END
 
     " Enable file type detection.

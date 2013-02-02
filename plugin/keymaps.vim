@@ -7,7 +7,9 @@ let g:C_f_cmd = "find . -type f -iwholename '*INPUT*' | egrep -v \"(svn|~)\""
 noremap <S-F1> :execute "".input("")<CR>
 noremap <F1> :echo "F1 - help\nF2 - MarksBrowser\nF3 - Rgrep\nF4 - HexView\nF5 - man\nF6 - Cscope\nF7 - filencoding\nF8 - RotateEnc\nF9 - make\nF10 - line_num\nF11 - find file"<CR>
 
-nnoremap <silent> <F2> :call ToggleHLMark(g:markHLName)<CR>
+nnoremap <silent> <F2> :ToggleLocalMark<CR>
+nnoremap <silent> <C-F2> :ToggleGlobalMark<CR>
+
 nnoremap <silent> <S-F2> :MarksBrowser<CR>
 nnoremap <silent> <S-A-F2> :call clearmatches()<CR>
 

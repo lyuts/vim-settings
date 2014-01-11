@@ -17,8 +17,8 @@ nnoremap <silent> <S-A-F2> :call clearmatches()<CR>
 "nnoremap <F3> :Rgrep -I<CR>
 "nnoremap <S-F3> :Rgrep -iI<CR>
 
-nnoremap <F3> :call VDEGrepProjectFiles(input("Search for => ", expand("<cword>")), 1)<CR>
-nnoremap <S-F3> :call VDEGrepProjectFiles(input("Search for => ", expand("<cword>")), 0)<CR>
+nnoremap <F3> :call VDEGrepProjectFiles(1)<CR>
+nnoremap <S-F3> :call VDEGrepProjectFiles(0)<CR>
 
 "command! StripProjectRoot :setlocal modifiable<CR>:execute ":%s#^".GetProjectParamByFile(expand("%:h"), "Path")."/##g"<CR>:setlocal nomodifiable<CR>
 

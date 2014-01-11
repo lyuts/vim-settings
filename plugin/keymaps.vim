@@ -122,3 +122,31 @@ elseif v:progname =~? "vim"
 
 "    noremap <C-/> :Search<Space>
 endif
+
+" format selection
+vmap Q gq
+" format paragraph
+nmap Q gqap
+
+" stop using arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" easy tab navigation
+map <S-h> gT
+map <S-j> gT
+map <S-k> gt
+map <S-l> gt
+
+nmap <silent> ,/ :noh<CR>
+
+" in case you forgot sudo
+cmap w!! w !sudo tee % >/dev/null

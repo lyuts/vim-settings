@@ -3,10 +3,10 @@ if has("autocmd")
         au!
         highlight RedundantWhitespace ctermbg=red guibg=red
         " highlight trailing spaces
-        au BufNewFile,BufRead * let b:mtrailingws=matchadd('RedundantWhitespace', '\s\+$', -1)
+        au BufWinEnter * let b:mtrailingws=matchadd('RedundantWhitespace', '\s\+$', -1)
         " highlight tabs between spaces
-        au BufNewFile,BufRead * let b:mtabbeforesp=matchadd('RedundantWhitespace', '\v(\t+)\ze( +)', -1)
-        au BufNewFile,BufRead * let b:mtabaftersp=matchadd('RedundantWhitespace', '\v( +)\zs(\t+)', -1)
+        au BufWinEnter * let b:mtabbeforesp=matchadd('RedundantWhitespace', '\v(\t+)\ze( +)', -1)
+        au BufWinEnter * let b:mtabaftersp=matchadd('RedundantWhitespace', '\v( +)\zs(\t+)', -1)
     augroup END
 
 

@@ -38,7 +38,6 @@ let g:pathogen_disabled = []
 "let g:pathogen_disabled += [ 'calendar' ]
 "let g:pathogen_disabled += [ 'CamelCaseMotion.git' ]
 "let g:pathogen_disabled += [ 'clam.vim.git' ]
-"let g:pathogen_disabled += [ 'clang_complete' ]
 "let g:pathogen_disabled += [ 'code_complete' ]
 "let g:pathogen_disabled += [ 'CSApprox' ]
 "let g:pathogen_disabled += [ 'cscope_maps' ]
@@ -53,10 +52,9 @@ let g:pathogen_disabled += [ 'gnupg.git' ]
 "let g:pathogen_disabled += [ 'gtags' ]
 "let g:pathogen_disabled += [ 'hexman.vim.git' ]
 "let g:pathogen_disabled += [ 'IniParser.git' ]
-"let g:pathogen_disabled += [ 'javacomplete.git' ]
 "let g:pathogen_disabled += [ 'latexSuite-1.5' ]
 "let g:pathogen_disabled += [ 'lightcolorschemes' ]
-"let g:pathogen_disabled += [ 'markHL' ]
+"let g:pathogen_disabled += [ 'vim-markHL.git' ]
 "let g:pathogen_disabled += [ 'Marks-Browser.git' ]
 "let g:pathogen_disabled += [ 'matchit' ]
 "let g:pathogen_disabled += [ 'molokai.git' ]
@@ -67,17 +65,17 @@ let g:pathogen_disabled += [ 'multichange.vim.git' ]
 "let g:pathogen_disabled += [ 'omnicppcomplete' ]
 "let g:pathogen_disabled += [ 'progressbar-widget.git' ]
 let g:pathogen_disabled += [ 'shellasync.vim.git' ]
-let g:pathogen_disabled += [ 'supertab.git' ]
 "let g:pathogen_disabled += [ 'SyntaxAttr.git' ]
 "let g:pathogen_disabled += [ 'tabman.git' ]
 "let g:pathogen_disabled += [ 'tabular.git' ]
 "let g:pathogen_disabled += [ 'tagbar.git' ]
 let g:pathogen_disabled += [ 'taglist' ]
-"let g:pathogen_disabled += [ 'tips.vim.git' ]
+let g:pathogen_disabled += [ 'tips.vim.git' ]
 "let g:pathogen_disabled += [ 'undotree.git' ]
 let g:pathogen_disabled += [ 'utl.vim.git' ]
 "let g:pathogen_disabled += [ 'vde' ]
 "let g:pathogen_disabled += [ 'vim-bufferlist.git' ]
+let g:pathogen_disabled += [ 'vim-clang.git' ]
 "let g:pathogen_disabled += [ 'vim-colors-solarized.git' ]
 "let g:pathogen_disabled += [ 'vim-commentary.git' ]
 "let g:pathogen_disabled += [ 'vim-fugitive' ]
@@ -100,7 +98,7 @@ let g:pathogen_disabled += [ 'vim-yankstack.git' ]
 let g:pathogen_disabled += [ 'xml' ]
 "let g:pathogen_disabled += [ 'ZoomWin.git' ]
 
-call pathogen#infect('config/{}', 'bundle/{}')
+call pathogen#infect('config/{}', 'bundle/{}', 'colors/{}')
 "}}} pathogen
 
 " Shortcuts: {{{
@@ -165,8 +163,8 @@ if has("unix")
         set encoding=utf-8
         set termencoding=utf-8
     elseif g:OS == "FreeBSD"
-        set encoding=koi8-r
-        set termencoding=koi8-r
+        set encoding=utf-8
+        set termencoding=utf-8
         let g:Grep_Xargs_Options="-0"
     else
         " we got MacOS, Solaris, etc
@@ -299,6 +297,7 @@ let s:comment['c'] = "//"
 let s:comment['cpp'] = "//"
 let s:comment['dot'] = "//"
 let s:comment['java'] = "//"
+let s:comment['rust'] = "//"
 let s:comment['lua'] = "--"
 let s:comment['sql'] = "--"
 let s:comment['vim'] = "\""
@@ -348,14 +347,18 @@ endfunction "}}}
 """ Run() - runs executable
 """
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! Run()
-"    let l:name = getcwd()
-"    let l:beg = strridx(l:name, "/")
-"    "echo s:beg
-"    let l:name = strpart(l:name, l:beg + 1)
-"    "echo s:name
-"    return ":! ./".l:name
-"endfunction
+let s:make_prg = {}
+let s:make_prg['python'] = "python\\ %"
+let s:make_prg['rust'] = "rust\\ build\\ %"
+let s:errfmt = {}
+let s:errfmt['python'] = "\\ \\ File\\ \"%f\"\\,\\ line\\ %l\\,\\ in\\ %*[^\\,]\\,\\ %m"
+
+function! Run()
+    execute ":setlocal makeprg=".s:make_prg[&ft]
+    execute ":setlocal errorformat=".s:errfmt[&ft]
+    execute ":make"
+    execute ":loadview"
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """

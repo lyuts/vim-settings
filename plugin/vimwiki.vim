@@ -12,3 +12,5 @@ let wiki.maxhi = 1
 let portable = {}
 let portable.path = '/media/80501633903/vimwiki'
 let g:vimwiki_list = [wiki, portable]
+
+let g:vimwiki_autowriteall = 0

@@ -135,16 +135,16 @@ map <left> <nop>
 map <right> <nop>
 
 " easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+"map <C-h> <C-w>h
+"map <C-j> <C-w>j
+"map <C-k> <C-w>k
+"map <C-l> <C-w>l
 
 " easy tab navigation
-map <S-h> gT
-map <S-j> gT
-map <S-k> gt
-map <S-l> gt
+"map <S-h> gT
+"map <S-j> gT
+"map <S-k> gt
+"map <S-l> gt
 
 nmap <silent> ,/ :noh<CR>
 

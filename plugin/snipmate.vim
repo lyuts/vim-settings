@@ -1,1 +1,1 @@
-let g:snippets_dir = "~/.vim/config/vim-settings.git/snippets"
+let g:snippets_dir = expand("~/.vim/bundle/vim-settings/snippets")

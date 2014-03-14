@@ -139,8 +139,6 @@ Bundle 'xuhdev/vim-latex-live-preview'
 "Bundle 'yesmeck/tips.vim'
 Bundle 'zhaocai/GoldenView.Vim'
 
-Bundle 'file:///home/oleksiit/.vim/bundle/eclim'
-
 filetype plugin indent on     " required
 " }}}
 

@@ -29,77 +29,120 @@
 " /a\_.*b search for a.*b over newlines
 " (insert) CTRL-R =getcwd()
 " (normal) :read !ps
+" ^V^I insert tab that won't be expanded to spaces
 " Use system's clipboard !!!!!
 "set clipboard=unnamed
 
-" pathogen: {{{
-let g:pathogen_disabled = []
-"let g:pathogen_disabled += [ 'a.vim.git' ]
-"let g:pathogen_disabled += [ 'calendar' ]
-"let g:pathogen_disabled += [ 'CamelCaseMotion.git' ]
-"let g:pathogen_disabled += [ 'clam.vim.git' ]
-let g:pathogen_disabled += [ 'code_complete' ]
-"let g:pathogen_disabled += [ 'CSApprox' ]
-"let g:pathogen_disabled += [ 'cscope_maps' ]
-"let g:pathogen_disabled += [ 'csv.vim.git' ]
-"let g:pathogen_disabled += [ 'ctrlp.vim.git' ]
-"let g:pathogen_disabled += [ 'DfrankUtil.git' ]
-"let g:pathogen_disabled += [ 'diffchanges' ]
-"let g:pathogen_disabled += [ 'DirDiff.vim.git' ]
-"let g:pathogen_disabled += [ 'easydigraph.vim.git' ]
-let g:pathogen_disabled += [ 'gnupg.git' ]
-"let g:pathogen_disabled += [ 'grep' ]
-"let g:pathogen_disabled += [ 'gtags' ]
-"let g:pathogen_disabled += [ 'hexman.vim.git' ]
-"let g:pathogen_disabled += [ 'IniParser.git' ]
-"let g:pathogen_disabled += [ 'latexSuite-1.5' ]
-"let g:pathogen_disabled += [ 'lightcolorschemes' ]
-"let g:pathogen_disabled += [ 'vim-markHL.git' ]
-"let g:pathogen_disabled += [ 'Marks-Browser.git' ]
-"let g:pathogen_disabled += [ 'matchit' ]
-"let g:pathogen_disabled += [ 'molokai.git' ]
-let g:pathogen_disabled += [ 'multichange.vim.git' ]
-"let g:pathogen_disabled += [ 'my_code_complete.snippets' ]
-"let g:pathogen_disabled += [ 'nerdtree.git' ]
-"let g:pathogen_disabled += [ 'NrrwRgn.git' ]
-"let g:pathogen_disabled += [ 'omnicppcomplete' ]
-"let g:pathogen_disabled += [ 'progressbar-widget.git' ]
-let g:pathogen_disabled += [ 'shellasync.vim.git' ]
-"let g:pathogen_disabled += [ 'SyntaxAttr.git' ]
-"let g:pathogen_disabled += [ 'tabman.git' ]
-"let g:pathogen_disabled += [ 'tabular.git' ]
-"let g:pathogen_disabled += [ 'tagbar.git' ]
-let g:pathogen_disabled += [ 'taglist' ]
-let g:pathogen_disabled += [ 'tips.vim.git' ]
-"let g:pathogen_disabled += [ 'undotree.git' ]
-let g:pathogen_disabled += [ 'utl.vim.git' ]
-"let g:pathogen_disabled += [ 'vde' ]
-"let g:pathogen_disabled += [ 'vim-bufferlist.git' ]
-let g:pathogen_disabled += [ 'vim-clang.git' ]
-"let g:pathogen_disabled += [ 'vim-colors-solarized.git' ]
-"let g:pathogen_disabled += [ 'vim-commentary.git' ]
-"let g:pathogen_disabled += [ 'vim-fugitive' ]
-"let g:pathogen_disabled += [ 'vim-mac-classic-theme.git' ]
-"let g:pathogen_disabled += [ 'vim-markdown.git' ]
-let g:pathogen_disabled += [ 'vim-pad.git' ]
-"let g:pathogen_disabled += [ 'vim-pipe.git' ]
-"let g:pathogen_disabled += [ 'vim-plugin-viewdoc.git' ]
-"let g:pathogen_disabled += [ 'vim-powerline.git' ]
-"let g:pathogen_disabled += [ 'vimprj.git' ]
-let g:pathogen_disabled += [ 'vim-repeat.git' ]
-"let g:pathogen_disabled += [ 'vim-speeddating.git' ]
-"let g:pathogen_disabled += [ 'vim-surround.git' ]
-"let g:pathogen_disabled += [ 'vim-textobj-user.git' ]
-let g:pathogen_disabled += [ 'vim-timetap.git' ]
-"let g:pathogen_disabled += [ 'vimux.git' ]
-"let g:pathogen_disabled += [ 'vimwiki' ]
-"let g:pathogen_disabled += [ 'vimwiki.hg' ]
-let g:pathogen_disabled += [ 'vim-yankstack.git' ]
-let g:pathogen_disabled += [ 'xml' ]
-"let g:pathogen_disabled += [ 'ZoomWin.git' ]
+" vundle: {{{
+set nocompatible
+filetype off                  " required
 
-call pathogen#infect('config/{}', 'bundle/{}', 'colors/{}')
-"}}} pathogen
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" alternatively, pass a path where Vundle should install bundles
+"let path = '~/some/path/here'
+"call vundle#rc(path)
+
+Bundle 'gmarik/vundle'
+" config
+Bundle 'lyuts/vim-settings'
+
+Bundle 'a.vim'
+"Bundle 'calendar.vim'
+Bundle 'AndrewRadev/multichange.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'Pylons/waitress'
+Bundle 'Rykka/easydigraph.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimproc.vim'
+Bundle 'Stormherz/tablify'
+"Bundle 'Valloric/YouCompleteMe'
+Bundle 'benmills/vimux'
+Bundle 'bewest/argparse'
+Bundle 'bkad/CamelCaseMotion'
+Bundle 'bling/vim-airline'
+Bundle 'chrisbra/NrrwRgn'
+Bundle 'chrisbra/csv.vim'
+Bundle 'davidhalter/jedi'
+Bundle 'defnull/bottle'
+"Bundle 'fmoralesc/vim-pad'
+Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
+Bundle 'gregsexton/VimCalc'
+Bundle 'gregsexton/gitv'
+Bundle 'h1mesuke/vim-unittest'
+Bundle 'hlissner/vim-multiedit'
+Bundle 'itchyny/calendar.vim'
+Bundle 'jamessan/vim-gnupg'
+Bundle 'jcfaria/Vim-R-plugin'
+Bundle 'junegunn/vim-scroll-position'
+Bundle 'justincampbell/vim-eighties'
+Bundle 'kana/vim-textobj-user'
+Bundle 'kennethreitz/requests'
+Bundle 'kien/ctrlp.vim'
+Bundle 'kien/tabman.vim'
+Bundle 'krisajenkins/vim-pipe'
+Bundle 'lyuts/vim-markHL'
+Bundle 'lyuts/vim-vde'
+Bundle 'majutsushi/tagbar'
+Bundle 'mattboehm/vim-unstack'
+Bundle 'maxbrunsfeld/vim-yankstack'
+Bundle 'mbbill/code_complete'
+Bundle 'mbbill/undotree'
+Bundle 'msanders/snipmate.vim'
+Bundle 'nosami/OmniSharpServer'
+"Bundle 'powerman/vim-plugin-viewdoc'
+Bundle 'rainerborene/vim-timetap'
+Bundle 'roblillack/vim-bufferlist'
+Bundle 'ross/requests-futures'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'sjl/clam.vim'
+Bundle 'slezica/python-frozendict'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'tomasr/molokai'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-obsession'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-scriptease'
+Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-surround'
+Bundle 'troydm/shellasync.vim'
+Bundle 'vim-jp/vital.vim'
+Bundle 'vim-scripts/CSApprox'
+Bundle 'vim-scripts/DfrankUtil'
+Bundle 'vim-scripts/DirDiff.vim'
+Bundle 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
+Bundle 'vim-scripts/Marks-Browser'
+Bundle 'vim-scripts/SyntaxAttr.vim'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'vim-scripts/diffchanges.vim'
+Bundle 'vim-scripts/grep.vim'
+Bundle 'vim-scripts/gtags.vim'
+Bundle 'vim-scripts/hexman.vim'
+"Bundle 'vim-scripts/lua.vim'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/progressbar-widget'
+Bundle 'vim-scripts/summerfruit256.vim'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'vim-scripts/utl.vim'
+Bundle 'vim-scripts/vimprj'
+Bundle 'vim-scripts/vimwiki'
+Bundle 'vim-scripts/xml.vim'
+Bundle 'xuhdev/vim-IniParser'
+Bundle 'xuhdev/vim-latex-live-preview'
+"Bundle 'yesmeck/tips.vim'
+Bundle 'zhaocai/GoldenView.Vim'
+
+Bundle 'file:///home/oleksiit/.vim/bundle/eclim'
+
+filetype plugin indent on     " required
+" }}}
 
 " Shortcuts: {{{
 " Formatting: {{{

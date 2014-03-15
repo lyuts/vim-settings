@@ -150,3 +150,19 @@ nmap <silent> ,/ :noh<CR>
 
 " in case you forgot sudo
 cmap w!! w !sudo tee % >/dev/null
+
+" see: http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+if &term == "rxvt"
+    map <Esc>[23~ <S-F1>
+    map <Esc>[24~ <S-F2>
+    map <Esc>[25~ <S-F3>
+    map <Esc>[26~ <S-F4>
+    map <Esc>[28~ <S-F5>
+    map <Esc>[29~ <S-F6>
+    map <Esc>[31~ <S-F7>
+    map <Esc>[33~ <S-F8>
+    map <Esc>[33~ <S-F9>
+    map <Esc>[34~ <S-F10>
+    map <Esc>[23$ <S-F11>
+    map <Esc>[24$ <S-F12>
+endif

@@ -152,7 +152,7 @@ nmap <silent> ,/ :noh<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " see: http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
-if &term == "rxvt"
+if &term == "rxvt" || &term == "screen"
     map <Esc>[23~ <S-F1>
     map <Esc>[24~ <S-F2>
     map <Esc>[25~ <S-F3>

@@ -49,6 +49,7 @@ Bundle 'gmarik/vundle'
 Bundle 'lyuts/vim-settings'
 
 Bundle 'a.vim'
+Bundle 'altercation/vim-colors-solarized'
 "Bundle 'calendar.vim'
 Bundle 'AndrewRadev/multichange.vim'
 Bundle 'Lokaltog/vim-easymotion'

@@ -18,10 +18,12 @@ if has("autocmd")
     augroup ViewGrp
         au!
         au BufLeave,WinLeave,BufWritePost * if getftype(expand("%:p"))!="" | silent mkview
-        au BufEnter,WinEnter * if getftype(expand("%:p"))!="" | silent loadview
+"        au BufEnter,WinEnter * if getftype(expand("%:p"))!="" | silent loadview
+        au BufEnter * if getftype(expand("%:p"))!="" | silent loadview
 
         " disable line width limit for non source code files
-        au BufEnter,WinEnter,BufReadPost * if index(['sh', ''], &ft) != -1 | set textwidth=0 | else | set textwidth=80
+        " Note: this breaks netrw/NERDTree reuse of current window.
+"        au BufEnter,WinEnter,BufReadPost * if index(['sh', ''], &ft) != -1 | set textwidth=0 | else | set textwidth=80
 
         au BufEnter * call HLMarks()
     augroup END

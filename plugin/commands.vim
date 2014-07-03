@@ -7,7 +7,7 @@ command! -range=% DTB        :<line1>,<line2>s/\s\s*$//
 command! Beautify :w<CR>:!astyle -s4 -cKLvjbUH --mode=c --align-pointer=type %<CR>:edit!<CR>
 
 """ Check spelling: ru, en_us, ...
-command -nargs=1 SpellCheck :setlocal spell spelllang=<args>
+command! -nargs=1 SpellCheck :setlocal spell spelllang=<args>
 "map ruspell :setlocal spell spelllang=ru<CR>
 "map enspell :setlocal spell spelllang=en_us<CR>
 """"""

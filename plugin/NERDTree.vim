@@ -1,3 +1,4 @@
+let NERDTreeHijackNetrw = 1
 let NERDChristmasTree = 1
 """ files to ignore
 let NERDTreeIgnore = ['.*\.o$']

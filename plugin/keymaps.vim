@@ -1,5 +1,5 @@
 noremap // :call CommentBlock()<CR>
-noremap ` :NERDTreeFind <CR> :set mouse=a <CR>
+noremap ` :edit <C-R>=expand("%:h")<CR><CR> :set mouse=a<CR>
 
 let g:C_f_cmd = "find . -type f -iwholename '*INPUT*' | egrep -v \"(svn|~)\""
 "map <C-f> :call ExecSearch(substitute(g:C_f_cmd, "INPUT", input("File to find => "), "g"), "", "%f")<CR>
@@ -75,7 +75,7 @@ elseif v:progname =~? "gvim"
     """"""""
     """ MAPS
     """"""""
-    map <C-Tab> :call BufferList()<CR>
+"    map <C-Tab> :BufExplorer<CR>
 
     """ Alt + <Num>
     map <A-0> :NERDTreeToggle .<CR>
@@ -105,7 +105,7 @@ elseif v:progname =~? "vim"
     """ MAPS
     """"""""
     " Ctrl + Tab
-    map <C-I> :call BufferList()<CR>
+"    map <C-I> :BufExplorer<CR>
     """ Alt + <Num>
     map 0 :NERDTreeToggle .<CR>
     map 1 :execute ShowMakeResults()<CR><C-l>

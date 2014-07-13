@@ -45,42 +45,58 @@ call vundle#begin()
 "let path = '~/some/path/here'
 "call vundle#rc(path)
 
+command! -nargs=1 Off silent echo <args>
+
 Plugin 'gmarik/vundle'
 " config
 Plugin 'lyuts/vim-settings'
 
-Plugin 'a.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ardagnir/shadowvim'
-"Plugin 'FriedSock/smeargle'
+"fork of a.vim with imap's disabled
+Plugin 'fanchangyong/a.vim'
+
+Off 'FriedSock/smeargle'
+Off 'Shougo/neocomplcache.vim'
+Off 'Shougo/neocomplete.vim'
+Off 'Shougo/neosnippet.vim'
+Off 'Valloric/YouCompleteMe'
+Off 'ferranpm/vim-colorcode'
+Off 'fmoralesc/vim-pad'
+Off 'gregsexton/gitv'
+Off 'jcfaria/Vim-R-plugin'
+Off 'jiangmiao/auto-pairs'
+Off 'sjl/clam.vim'
+Off 'vim-scripts/CSApprox'
+Off 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
+Off 'vim-scripts/Marks-Browser'
+Off 'vim-scripts/SemanticHL'
+Off 'vim-scripts/SyntaxAttr.vim'
+Off 'vim-scripts/diffchar.vim'
+Off 'vim-scripts/lua.vim'
+Off 'xolox/vim-lua-inspect'
+Off 'xuhdev/vim-latex-live-preview'
+Off 'zhaocai/GoldenView.Vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Rykka/easydigraph.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
-"Plugin 'Shougo/neosnippet.vim'
-"Plugin 'Shougo/neocomplcache.vim'
-"Plugin 'Shougo/neocomplete.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'Stormherz/tablify'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Yggdroot/indentLine'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'bling/vim-airline'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'chrisbra/csv.vim'
 Plugin 'davidhalter/jedi'
-"Plugin 'ferranpm/vim-colorcode'
-"Plugin 'fmoralesc/vim-pad'
 Plugin 'godlygeek/tabular'
 Plugin 'gregsexton/VimCalc'
-"Plugin 'gregsexton/gitv'
 Plugin 'h1mesuke/vim-unittest'
 Plugin 'hlissner/vim-multiedit'
 Plugin 'itchyny/calendar.vim'
 Plugin 'jamessan/vim-gnupg'
-"Plugin 'jcfaria/Vim-R-plugin'
-"Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'junegunn/vim-scroll-position'
 Plugin 'justincampbell/vim-eighties'
@@ -99,7 +115,6 @@ Plugin 'mbbill/undotree'
 Plugin 'rainerborene/vim-timetap'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'sjl/clam.vim'
 Plugin 'someboddy/vim-vebugger'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'terryma/vim-expand-region'
@@ -119,20 +134,13 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'troydm/shellasync.vim'
 Plugin 'vim-jp/vital.vim'
-"Plugin 'vim-scripts/CSApprox'
 Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/DirDiff.vim'
-"Plugin 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
-Plugin 'vim-scripts/Marks-Browser'
-"Plugin 'vim-scripts/SemanticHL'
-"Plugin 'vim-scripts/SyntaxAttr.vim'
 Plugin 'vim-scripts/ZoomWin'
 Plugin 'vim-scripts/diffchanges.vim'
-"Plugin 'vim-scripts/diffchar.vim'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/gtags.vim'
 Plugin 'vim-scripts/hexman.vim'
-"Plugin 'vim-scripts/lua.vim'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'vim-scripts/multisearch.vim'
 Plugin 'vim-scripts/progressbar-widget'
@@ -142,11 +150,8 @@ Plugin 'vim-scripts/utl.vim'
 Plugin 'vim-scripts/vimprj'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'vim-scripts/xml.vim'
-Plugin 'xolox/vim-lua-inspect'
 Plugin 'xuhdev/vim-IniParser'
-"Plugin 'xuhdev/vim-latex-live-preview'
-"Plugin 'zhaocai/GoldenView.Vim'
-"
+
 call vundle#end()
 filetype plugin indent on     " required
 " }}}
@@ -198,6 +203,7 @@ set tabstop=4
 set expandtab
 " enable row numbers on the left
 set number
+set rnu
 set nuw=1
 "set foldmethod=indent
 set foldmethod=marker
@@ -207,6 +213,7 @@ set laststatus=2
 set noignorecase
 "}}}
 
+let mapleader = ' '
 if has("unix")
     let g:OS = substitute(system('uname'), "\n", "", "")
     if g:OS == "Linux"

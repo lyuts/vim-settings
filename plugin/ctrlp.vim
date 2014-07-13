@@ -5,3 +5,6 @@ let g:ctrlp_custom_ignore = {
     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
     \ }
 
+let g:ctrlp_root_markers = [ 'vde.index', 'vde.tags' ]
+
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" '

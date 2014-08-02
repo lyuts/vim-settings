@@ -65,14 +65,20 @@ Off 'gregsexton/gitv'
 Off 'jcfaria/Vim-R-plugin'
 Off 'jiangmiao/auto-pairs'
 Off 'justincampbell/vim-eighties'
+Off 'krisajenkins/vim-pipe'
+Off 'maxbrunsfeld/vim-yankstack'
 Off 'sjl/clam.vim'
 Off 'vim-scripts/CSApprox'
 Off 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
 Off 'vim-scripts/Marks-Browser'
 Off 'vim-scripts/SemanticHL'
 Off 'vim-scripts/SyntaxAttr.vim'
+Off 'vim-scripts/ZoomWin'
 Off 'vim-scripts/diffchar.vim'
+Off 'vim-scripts/grep.vim'
+Off 'vim-scripts/gtags.vim'
 Off 'vim-scripts/lua.vim'
+Off 'vim-scripts/taglist.vim'
 Off 'xolox/vim-lua-inspect'
 Off 'xuhdev/vim-latex-live-preview'
 Off 'zhaocai/GoldenView.Vim'
@@ -97,22 +103,23 @@ Plugin 'h1mesuke/vim-unittest'
 Plugin 'hlissner/vim-multiedit'
 Plugin 'itchyny/calendar.vim'
 Plugin 'jamessan/vim-gnupg'
-Plugin 'junegunn/limelight.vim'
+Plugin 'jaxbot/semantic-highlight.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'junegunn/vim-scroll-position'
 Plugin 'kana/vim-textobj-user'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'kien/tabman.vim'
-Plugin 'krisajenkins/vim-pipe'
 Plugin 'lyuts/vim-markHL'
 Plugin 'lyuts/vim-rtags'
 Plugin 'lyuts/vim-vde'
 Plugin 'majutsushi/tagbar'
+Plugin 'markwu/ZoomWin'
 Plugin 'mattboehm/vim-unstack'
-Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'mbbill/undotree'
+Plugin 'mileszs/ack.vim'
 Plugin 'rainerborene/vim-timetap'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'someboddy/vim-vebugger'
@@ -136,16 +143,12 @@ Plugin 'troydm/shellasync.vim'
 Plugin 'vim-jp/vital.vim'
 Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/DirDiff.vim'
-Plugin 'vim-scripts/ZoomWin'
 Plugin 'vim-scripts/diffchanges.vim'
-Plugin 'vim-scripts/grep.vim'
-Plugin 'vim-scripts/gtags.vim'
 Plugin 'vim-scripts/hexman.vim'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'vim-scripts/multisearch.vim'
 Plugin 'vim-scripts/progressbar-widget'
 Plugin 'vim-scripts/summerfruit256.vim'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/utl.vim'
 Plugin 'vim-scripts/vimprj'
 Plugin 'vim-scripts/vimwiki'
@@ -192,6 +195,17 @@ filetype plugin indent on     " required
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 set nomodeline
+set autoindent
+set showmode
+set showcmd
+set hidden
+set nocursorline
+set visualbell
+set ttyfast
+set ruler
+set history=50
+set incsearch
+set noshowmatch " show the cursor at opening '{'
 """ Tab settings
 " 1 tab on indentation = 4 spaces
 set shiftwidth=4
@@ -201,6 +215,7 @@ set softtabstop=4
 set tabstop=4
 " spaces instead of tab (use :retab)
 set expandtab
+set wrap
 " enable row numbers on the left
 set number
 set rnu
@@ -211,9 +226,10 @@ set foldmethod=marker
 set backspace=indent,eol,start
 set laststatus=2
 set noignorecase
+set backup
+set noswapfile
 "}}}
 
-let mapleader = ' '
 if has("unix")
     let g:OS = substitute(system('uname'), "\n", "", "")
     if g:OS == "Linux"
@@ -264,7 +280,7 @@ fu! MyFoldingFn()
     let foldSize = 1 + v:foldend - v:foldstart
     let lineCount = line("$")
     let foldPercentage = printf(" %.1f", (foldSize*1.0) * 100 / lineCount) . "% "
-    return v:folddashes . " " . foldSize . " lines (" . foldPercentage . "): " . line . " "
+    return v:folddashes . " " . line . " " . foldSize . " lines (" . foldPercentage . "): "
 endfu
 "}}}
 
@@ -588,19 +604,6 @@ endfunction
 "set langmap='q,\,w,.e,pr,yt,fy,gu,ci,ro,lp,/[,=],aa,os,ed,uf,ig,dh,hj,tk,nl,s\\;,-',\\;z,qx,jc,kv,xb,bn,mm,w\,,v.,z/,[-,]=,\"Q,<W,>E,PR,YT,FY,GU,CI,RO,LP,?{,+},AA,OS,ED,UF,IG,DH,HJ,TK,NL,S:,_\",:Z,QX,JC,KV,XB,BN,MM,W<,V>,Z?
 set statusline=%<%f%h%m%r%=%b\ %{&encoding}\ 0x%B\ \ %l,%c%V\ %P
 
-set autoindent      " always set autoindenting on
-
-if has("vms")
-  set nobackup      " do not keep a backup file, use versions instead
-else
-  set backup        " keep a backup file
-endif
-set history=50      " keep 50 lines of command line history
-set ruler       " show the cursor position all the time
-set showcmd     " display incomplete commands
-set incsearch       " do incremental searching
-"set showmatch      " show the cursor at opening '{'
-
 
 """ Set colorscheme: {{{
 set background=dark
@@ -631,10 +634,13 @@ endif
 
 " if vim 7.3 and higher
 if v:version >= 703
-    set undodir=~/.vim/undo
+    set undodir=~/.vim/undo//
+    set backupdir=~/.vim/backup//
+    set directory=~/.vim/swap//
+
     """ Set textwidth in ViewGrp
 "    set textwidth=90
-    set cc=+1
+    set colorcolumn=+1
     hi ColorColumn ctermbg=red guibg=lightgrey
 
     set undofile
@@ -670,34 +676,7 @@ endfunction
 function! SelfTest()
     call CheckSetup("Vim cfg file", "v:version >= 703 && getftype(expand(\"~/.vimrc\")) == \"file\"")
     call CheckSetup("Undo directory", "v:version >= 703 && getftype(&undodir) == \"dir\"")
+    call CheckSetup("Backup directory", "v:version >= 703 && getftype(&backupdir) == \"dir\"")
+    call CheckSetup("Swap directory", "v:version >= 703 && getftype(&directory) == \"dir\"")
     call CheckSetup("VDE proj files", "v:version >= 703 && getftype(expand(\"~/.vim_projects\")) == \"file\"")
-endfunction
-
-
-
-"function! CalcEntryLevel
-function! ParseMindMap()
-    let lines = readfile(expand("%:p"))
-    let stack = []
-    let tree = {}
-    let id = 0
-    for line in lines
-        let level = CalcEntryLevel(line)
-        call add(dot, "node_".id)
-        let id = id + 1
-    endfor
-
-endfunction
-
-function! GenMindMap()
-    let dot = []
-    call add(dot, "digraph G {")
-
-
-"    echo lines
-
-    call add(dot, "}")
-    let fname = tempname()
-    call writefile(dot, fname)
-    execute "!/home/otsai/Downloads/xdot.py ".fname
 endfunction

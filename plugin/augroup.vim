@@ -1,4 +1,7 @@
 if has("autocmd")
+
+    au VimResized * exe "normal! \<c-w>="
+
     augroup WhiteSpaceGrp
         au!
         highlight RedundantWhitespace ctermbg=red guibg=red
@@ -18,7 +21,7 @@ if has("autocmd")
     augroup ViewGrp
         au!
 "        au BufLeave,WinLeave,BufWritePost * if getftype(expand("%:p"))!="" | silent mkview
-""        au BufEnter,WinEnter * if getftype(expand("%:p"))!="" | silent loadview
+"        au BufEnter,WinEnter * if getftype(expand("%:p"))!="" | silent loadview
 "        au BufEnter * if getftype(expand("%:p"))!="" | silent loadview
 
         " disable line width limit for non source code files
@@ -26,6 +29,8 @@ if has("autocmd")
 "        au BufEnter,WinEnter,BufReadPost * if index(['sh', ''], &ft) != -1 | set textwidth=0 | else | set textwidth=80
 
         au BufEnter * call HLMarks()
+
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute 'normal! g`"zvzz' | endif
     augroup END
 
     augroup VimModeGrp

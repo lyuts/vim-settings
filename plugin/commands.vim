@@ -16,3 +16,6 @@ if v:progname =~? "vimdiff"
     command! -range DiffPut :<line1>,<line2>diffput
     command! -range DiffGet :<line1>,<line2>diffget
 endif
+
+" Source visual selection to immediately take effect
+command! -range=% Source     :<line1>,<line2>y|execute @@

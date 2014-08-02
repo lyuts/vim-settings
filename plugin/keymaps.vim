@@ -1,6 +1,7 @@
 noremap // :call CommentBlock()<CR>
 noremap ` :edit <C-R>=sort([expand("~"), expand("%:h")])[-1]<CR><CR> :set mouse=a<CR>
 
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 let g:C_f_cmd = "find . -type f -iwholename '*INPUT*' | egrep -v \"(svn|~)\""
 "map <C-f> :call ExecSearch(substitute(g:C_f_cmd, "INPUT", input("File to find => "), "g"), "", "%f")<CR>
 

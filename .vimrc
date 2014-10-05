@@ -34,6 +34,8 @@
 " Use system's clipboard !!!!!
 "set clipboard=unnamed
 
+let mapleader = "\<Space>"
+
 " vundle: {{{
 set nocompatible
 filetype off                  " required

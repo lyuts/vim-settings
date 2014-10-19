@@ -25,3 +25,5 @@ let NERDTreeIgnore += ['.*\.class']
 let NERDTreeIgnore += ['tags']
 
 let NERDTreeIgnore += ['.*\.gch']
+
+nnoremap <Leader>nf :NERDTreeFind<CR>

@@ -41,7 +41,7 @@ set nocompatible
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 " alternatively, pass a path where Vundle should install bundles
 "let path = '~/some/path/here'
@@ -49,7 +49,7 @@ call vundle#begin()
 
 command! -nargs=1 Off silent echo <args>
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 " config
 Plugin 'lyuts/vim-settings'
 

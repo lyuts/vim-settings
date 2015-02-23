@@ -1,0 +1,78 @@
+
+===============================================================================
+VVV VVV IIIII MMM     MMM
+V V V V I   I M  M   M  M
+V V V V II II M   M M   M
+V V V V  I I  M    M    M
+V  V  V  I I  M  M   M  M
+ V   V  II II M  MM MM  M
+  V V   I   I M  M M M  M
+   V    IIIII MMMM   MMMM
+
+
+CONTENTS
+
+    1. Normal mode.....................................|vim-settings-normal|
+    2. Visual mode.....................................|vim-settings-visual|
+    3. Insert mode.....................................|vim-settings-insert|
+
+===============================================================================
+1. Normal mode                                           *vim-settings-normal*
+
+ga          Show ascii code of a symbol under cursor
+g;          Jump to last edit position
+gq          Reformat according to applied settings.
+r<char>     Replace character under cursor with <char>.
+d<motion>   Delete according to <motion>, e.g. de deletes till the end of the word
+c<motion>   Change according to <motino>, e.g. ce deletes till the end of the
+            word and enables insert mode.
+
+" di>   when standing on a closing angle bracket, this will delete the inner block
+" da>   when standing on a closing angle bracket, this will delete the inner block + brackets
+
+]           Jump forward one paragraph.
+)           Jump forward one sentence.
+
+H           Take the cursor directly to the 'H'ighest line on the screen.
+M           Take the cursor directly to the 'M'iddle line on the screen.
+L           Take the cursor directly to the 'L'ower line on the screen.
+<C-6>       Jump to previous buffer.
+
+" #/*   prev/next identity matched by an expression via '/'.
+" J join line with the next one (or all lines in a visually selected block).
+" zt    Keep cursor at line, but scroll the view so that the cursor appears on top line
+" zz    Keep cursor at line, but scroll the view so that the cursor appears on middle line
+" zb    Keep cursor at line, but scroll the view so that the cursor appears on bottom line
+" e     move to the end of the word (treats words as <word>)
+" E     move to the end of the word (treats words as WORD, everything that is not blank)
+" w     move to the beginning of the word (forward)
+" b     move to the beginning of the word (backward)
+" [{    jump to the nearest opening brace.
+" [(    jump to the nearest opening parenthesis.
+" [}    jump to the nearest closing brace.
+" [)    jump to the nearest closing parenthesis.
+" C-a   increase number under cursor
+" C-x   descrease number under cursor
+" /a\_.*b search for a.*b over newlines
+" (normal) :read !ps
+" Use system's clipboard !!!!!
+"set clipboard=unnamed
+
+<C-W>o      Maximize/restore current window.
+<C-Space>   Invoke ctrlspace window.
+
+===============================================================================
+2. Visual mode                                           *vim-settings-visual*
+
+===============================================================================
+3. Insert mode                                           *vim-settings-insert*
+
+<C-O>       One time switch to normal mode.
+<C-j>       Invoke ultisnips completion. After that use <C-k>/<C-j> to jump to
+            prev/next placholder.
+
+CTRL-R=getcwd()     Evaluate typed expression and place its result.
+^V^I                Insert tab that won't be expanded to spaces.
+^Vu00ac             Insert a char with unicode value of 00ac.
+
+vim:ft=help:tw=80

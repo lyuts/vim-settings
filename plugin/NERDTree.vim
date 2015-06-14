@@ -22,7 +22,7 @@ let NERDTreeIgnore += ['.*\.lo', '.*\.la']
 " java's binary files
 let NERDTreeIgnore += ['.*\.class']
 " tags
-let NERDTreeIgnore += ['tags']
+let NERDTreeIgnore += ['^tags']
 
 let NERDTreeIgnore += ['.*\.gch']
 

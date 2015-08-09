@@ -1,39 +1,5 @@
 " vim:tw=80:foldmethod=marker
 
-" ]     Paragraph forward.
-" )     Sentence forward.
-" r.    replace char under cursor.
-" #/*   prev/next identity matched by an expression via '/'.
-" J join line with the next one (or all lines in a visually selected block).
-" H     take the cursor directly to the 'H'ighest line on the screen
-" M     take the cursor directly to the 'M'iddle line on the screen
-" L     take the cursor directly to the 'L'ower line on the screen
-" zt    Keep cursor at line, but scroll the view so that the cursor appears on top line
-" zz    Keep cursor at line, but scroll the view so that the cursor appears on middle line
-" zb    Keep cursor at line, but scroll the view so that the cursor appears on bottom line
-" de    = d + e = delete according to motion 'e', delete till the end of the word
-" ce    = c + e = change till the end of the word ~ de + i
-" e     move to the end of the word (treats words as <word>)
-" E     move to the end of the word (treats words as WORD, everything that is not blank)
-" w     move to the beginning of the word (forward)
-" b     move to the beginning of the word (backward)
-" di>   when standing on a closing angle bracket, this will delete the inner block
-" da>   when standing on a closing angle bracket, this will delete the inner block + brackets
-" [{    jump to the nearest opening brace.
-" [(    jump to the nearest opening parenthesis.
-" [}    jump to the nearest closing brace.
-" [)    jump to the nearest closing parenthesis.
-" gq    reformat according to applied settings
-" C-a   increase number under cursor
-" C-x   descrease number under cursor
-" /a\_.*b search for a.*b over newlines
-" (insert) CTRL-R =getcwd()
-" (normal) :read !ps
-" ^V^I insert tab that won't be expanded to spaces
-" ^Vu00ac insert a char with unicode value of 00ac
-" Use system's clipboard !!!!!
-"set clipboard=unnamed
-
 let mapleader = "\<Space>"
 
 " vundle: {{{

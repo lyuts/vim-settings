@@ -129,6 +129,7 @@ Plugin 'vim-scripts/utl.vim'
 Plugin 'vim-scripts/vimprj'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'vim-scripts/xml.vim'
+Plugin 'wting/rust.vim'
 Plugin 'xuhdev/vim-IniParser'
 
 call vundle#end()

@@ -1,26 +1,25 @@
 " vim:tw=80:foldmethod=marker
 
+" auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+endif
+
 let mapleader = "\<Space>"
 
-" vundle: {{{
+" vimplug: {{{
 set nocompatible
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
+call plug#begin('~/.vim/bundle')
 
 command! -nargs=1 Off silent echo <args>
 
-Plugin 'gmarik/Vundle.vim'
 " config
-Plugin 'lyuts/vim-settings'
+Plug 'lyuts/vim-settings', { 'branch' : 'vimplug' }
 
 "fork of a.vim with imap's disabled
-Plugin 'fanchangyong/a.vim'
+Plug 'fanchangyong/a.vim', { 'for' : ['cpp', 'c', 'h', 'hpp'] }
 
 Off 'FriedSock/smeargle'
 Off 'Shougo/neocomplcache.vim'
@@ -50,89 +49,87 @@ Off 'vim-scripts/taglist.vim'
 Off 'xolox/vim-lua-inspect'
 Off 'xuhdev/vim-latex-live-preview'
 Off 'zhaocai/GoldenView.Vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Rykka/easydigraph.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'Stormherz/tablify'
-Plugin 'Yggdroot/indentLine'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'benmills/vimux'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'bling/vim-airline'
-Plugin 'chrisbra/NrrwRgn'
-Plugin 'chrisbra/csv.vim'
-Plugin 'davidhalter/jedi'
-Plugin 'deris/vim-shot-f'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'farseer90718/vim-taskwarrior'
-Plugin 'godlygeek/tabular'
-Plugin 'gregsexton/VimCalc'
-Plugin 'h1mesuke/vim-unittest'
-Plugin 'hlissner/vim-multiedit'
-Plugin 'itchyny/calendar.vim'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'jaxbot/semantic-highlight.vim'
-Plugin 'junegunn/vim-scroll-position'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kien/ctrlp.vim'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'kien/tabman.vim'
-"Plugin 'kopischke/vim-fetch'
-Plugin 'lyuts/vim-markHL'
-Plugin 'lyuts/vim-mymaps'
-Plugin 'lyuts/vim-rtags'
-Plugin 'lyuts/vim-vde'
-Plugin 'majutsushi/tagbar'
-Plugin 'markwu/ZoomWin'
-Plugin 'mattboehm/vim-unstack'
-Plugin 'mattn/ctrlp-mark'
-Plugin 'mbbill/undotree'
-Plugin 'mileszs/ack.vim'
-Plugin 'racer-rust/vim-racer'
-Plugin 'rainerborene/vim-timetap'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'someboddy/vim-vebugger'
-Plugin 'szw/vim-ctrlspace'
-Plugin 'terryma/vim-expand-region'
-Plugin 'thinca/vim-qfreplace'
-Plugin 'tomasr/molokai'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-obsession'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-scriptease'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'troydm/shellasync.vim'
-Plugin 'vim-jp/vital.vim'
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/DirDiff.vim'
-Plugin 'vim-scripts/argwrap.vim'
-Plugin 'vim-scripts/diffchanges.vim'
-Plugin 'vim-scripts/hexman.vim'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'vim-scripts/multisearch.vim'
-Plugin 'vim-scripts/progressbar-widget'
-Plugin 'vim-scripts/summerfruit256.vim'
-Plugin 'vim-scripts/utl.vim'
-Plugin 'vim-scripts/vimprj'
-Plugin 'vim-scripts/vimwiki'
-Plugin 'vim-scripts/xml.vim'
-Plugin 'wting/rust.vim'
-Plugin 'xuhdev/vim-IniParser'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'Raimondi/delimitMate'
+Plug 'Rykka/easydigraph.vim'
+Plug 'Shougo/unite.vim' | Plug 'Shougo/vimproc.vim'
+Plug 'SirVer/ultisnips'
+Plug 'Stormherz/tablify'
+Plug 'Yggdroot/indentLine'
+Plug 'altercation/vim-colors-solarized'
+Plug 'benmills/vimux'
+Plug 'bkad/CamelCaseMotion'
+Plug 'bling/vim-airline'
+Plug 'chrisbra/NrrwRgn'
+Plug 'chrisbra/csv.vim', { 'for' : 'csv' }
+Plug 'davidhalter/jedi', { 'for' : 'python'}
+Plug 'deris/vim-shot-f'
+Plug 'dyng/ctrlsf.vim'
+Plug 'farseer90718/vim-taskwarrior'
+Plug 'godlygeek/tabular'
+Plug 'gregsexton/VimCalc'
+Plug 'h1mesuke/vim-unittest', { 'for' : 'vim' }
+Plug 'hlissner/vim-multiedit'
+Plug 'itchyny/calendar.vim'
+Plug 'jamessan/vim-gnupg'
+Plug 'jaxbot/semantic-highlight.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kien/ctrlp.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'kien/tabman.vim'
+"Plug 'kopischke/vim-fetch'
+Plug 'lyuts/vim-markHL'
+Plug 'lyuts/vim-mymaps'
+Plug 'lyuts/vim-rtags', { 'for' : ['cpp', 'c'] }
+Plug 'lyuts/vim-vde'
+Plug 'majutsushi/tagbar'
+Plug 'markwu/ZoomWin'
+Plug 'mattboehm/vim-unstack'
+Plug 'mattn/ctrlp-mark'
+Plug 'mbbill/undotree'
+Plug 'mileszs/ack.vim'
+Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
+Plug 'rainerborene/vim-timetap'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeFind' }
+Plug 'scrooloose/syntastic'
+Plug 'someboddy/vim-vebugger'
+Plug 'szw/vim-ctrlspace'
+Plug 'terryma/vim-expand-region'
+Plug 'thinca/vim-qfreplace'
+Plug 'tomasr/molokai'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown', { 'for' : 'markdown' }
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'troydm/shellasync.vim'
+Plug 'vim-jp/vital.vim'
+Plug 'vim-scripts/DfrankUtil'
+Plug 'vim-scripts/DirDiff.vim'
+Plug 'vim-scripts/argwrap.vim'
+Plug 'vim-scripts/diffchanges.vim'
+Plug 'vim-scripts/hexman.vim'
+Plug 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/multisearch.vim'
+Plug 'vim-scripts/progressbar-widget'
+Plug 'vim-scripts/summerfruit256.vim'
+Plug 'vim-scripts/utl.vim'
+Plug 'vim-scripts/vimprj'
+Plug 'vim-scripts/vimwiki'
+Plug 'vim-scripts/xml.vim', { 'for' : 'xml' }
+Plug 'wting/rust.vim', { 'for' : 'rust' }
+Plug 'xuhdev/vim-IniParser'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on     " required
 " }}}
 

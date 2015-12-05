@@ -17,7 +17,7 @@ command! -nargs=1 Off silent echo <args>
 
 Plugin 'gmarik/Vundle.vim'
 " config
-Plugin 'lyuts/vim-settings'
+Plugin 'lyuts/vim-settings', { 'pinned' : 1 }
 
 "fork of a.vim with imap's disabled
 Plugin 'fanchangyong/a.vim'
@@ -76,7 +76,8 @@ Plugin 'hlissner/vim-multiedit'
 Plugin 'itchyny/calendar.vim'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'jaxbot/semantic-highlight.vim'
-Plugin 'junegunn/vim-scroll-position'
+Plugin 'jtdowney/vimux-cargo'
+Plugin 'junegunn/vim-scroll-position', { 'pinned' : 1 }
 Plugin 'kana/vim-textobj-user'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -95,6 +96,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'rainerborene/vim-timetap'
 Plugin 'rking/ag.vim'
+Plugin 'rust-lang/rust.vim', { 'name' : 'moz_rust.vim' }
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'someboddy/vim-vebugger'

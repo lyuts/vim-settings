@@ -85,7 +85,7 @@ Plugin 'kien/tabman.vim'
 "Plugin 'kopischke/vim-fetch'
 Plugin 'lyuts/vim-markHL'
 Plugin 'lyuts/vim-mymaps'
-Plugin 'lyuts/vim-rtags'
+Plugin 'lyuts/vim-rtags', { 'pinned' : 1 }
 Plugin 'lyuts/vim-vde'
 Plugin 'majutsushi/tagbar'
 Plugin 'markwu/ZoomWin'

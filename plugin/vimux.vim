@@ -5,7 +5,7 @@ endfunction
 
 function! VimuxRun(text)
     call VimuxOpenRunner()
-    call VimuxSendText(a:text)
+	call VimuxSendKeys('"'.escape(substitute(a:text, ";$", ";;", ""), '"`').'"')
     call VimuxSendKeys("Enter")
 endfunction
 

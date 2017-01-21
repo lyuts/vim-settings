@@ -62,7 +62,6 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'bkad/CamelCaseMotion'
-Plugin 'bling/vim-airline'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'chrisbra/csv.vim'
 Plugin 'davidhalter/jedi-vim'
@@ -117,6 +116,8 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'troydm/shellasync.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-jp/vital.vim'
 Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/DirDiff.vim'
@@ -585,8 +586,8 @@ set statusline=%<%f%h%m%r%=%b\ %{&encoding}\ 0x%B\ \ %l,%c%V\ %P
 
 
 """ Set colorscheme: {{{
-set background=dark
-colorscheme solarized
+set background=light
+colorscheme PaperColor
 set t_Co=256
 "}}}
 

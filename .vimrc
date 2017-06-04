@@ -98,7 +98,7 @@ Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim', { 'name' : 'moz_rust.vim' }
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'someboddy/vim-vebugger'
+"Plugin 'someboddy/vim-vebugger'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'terryma/vim-expand-region'
 Plugin 'thinca/vim-qfreplace'

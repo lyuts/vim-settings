@@ -1,4 +1,4 @@
-noremap // :call CommentBlock()<CR>
+noremap // :Commentary<CR>
 noremap ` :edit <C-R>=sort([expand("~"), expand("%:h")])[-1]<CR><CR> :set mouse=a<CR>
 
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>

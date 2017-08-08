@@ -336,46 +336,46 @@ endfunction
 """ param[in] firstline - Start of selected block
 """ param[in] lastline - End of selected block
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:comment = {}
-let s:comment['sh'] = "#"
-let s:comment['csh'] = "#"
-let s:comment['tcsh'] = "#"
-let s:comment['zsh'] = "#"
-let s:comment['ruby'] = "#"
-let s:comment['make'] = "#"
-let s:comment['cmake'] = "#"
-let s:comment['conf'] = "#"
-let s:comment['python'] = "#"
-let s:comment['c'] = "//"
-let s:comment['cpp'] = "//"
-let s:comment['dot'] = "//"
-let s:comment['java'] = "//"
-let s:comment['rust'] = "//"
-let s:comment['lua'] = "--"
-let s:comment['sql'] = "--"
-let s:comment['vim'] = "\""
+" let s:comment = {}
+" let s:comment['sh'] = "#"
+" let s:comment['csh'] = "#"
+" let s:comment['tcsh'] = "#"
+" let s:comment['zsh'] = "#"
+" let s:comment['ruby'] = "#"
+" let s:comment['make'] = "#"
+" let s:comment['cmake'] = "#"
+" let s:comment['conf'] = "#"
+" let s:comment['python'] = "#"
+" let s:comment['c'] = "//"
+" let s:comment['cpp'] = "//"
+" let s:comment['dot'] = "//"
+" let s:comment['java'] = "//"
+" let s:comment['rust'] = "//"
+" let s:comment['lua'] = "--"
+" let s:comment['sql'] = "--"
+" let s:comment['vim'] = "\""
 
-function! CommentBlock() range "{{{
-    let col = getpos('.')[2]
+" function! CommentBlock() range "{{{
+"     let col = getpos('.')[2]
 
-    try
-        let l:str = s:comment[&ft]
+"     try
+"         let l:str = s:comment[&ft]
 
-        if stridx(getline(a:firstline), l:str) == 0
-            execute a:firstline. "," . a:lastline . "s/".escape(l:str, '/')."//|noh"
-            let col = col - 2
-        else
-            execute a:firstline. "," . a:lastline . "s/^/".escape(l:str, '/')."/|noh"
-            let col = col + 2
-        endif
-    catch /E716:/
-        echohl ErrorMsg | echomsg "Vim doesn't know comments for this filetype" | echohl None
-    catch
-        echohl ErrorMsg | echomsg "Unexpected error" | echohl None
-    endtry
+"         if stridx(getline(a:firstline), l:str) == 0
+"             execute a:firstline. "," . a:lastline . "s/".escape(l:str, '/')."//|noh"
+"             let col = col - 2
+"         else
+"             execute a:firstline. "," . a:lastline . "s/^/".escape(l:str, '/')."/|noh"
+"             let col = col + 2
+"         endif
+"     catch /E716:/
+"         echohl ErrorMsg | echomsg "Vim doesn't know comments for this filetype" | echohl None
+"     catch
+"         echohl ErrorMsg | echomsg "Unexpected error" | echohl None
+"     endtry
 
-    call cursor(0, col)
-endfunction "}}}
+"     call cursor(0, col)
+" endfunction "}}}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -93,7 +93,7 @@ Plugin 'mattn/ctrlp-mark'
 Plugin 'mbbill/undotree'
 Plugin 'mileszs/ack.vim'
 Plugin 'racer-rust/vim-racer'
-Plugin 'rainerborene/vim-timetap'
+" Plugin 'rainerborene/vim-timetap'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim', { 'name' : 'moz_rust.vim' }
 Plugin 'scrooloose/nerdtree'

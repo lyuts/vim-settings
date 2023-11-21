@@ -286,6 +286,8 @@ if &t_Co > 2 || has("gui_running")
     set hlsearch
 endif
 
+set colorcolumn=+1
+hi ColorColumn ctermbg=red guibg=lightgrey
 
 if v:progname =~? "gvim"
     set guitablabel=%!expand(\"\%:p\")

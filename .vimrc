@@ -149,8 +149,9 @@ set foldmethod=marker
 set backspace=indent,eol,start
 set laststatus=2
 set noignorecase
-set backup
+set nobackup
 set noswapfile
+set noundofile
 "}}}
 
 if has("unix")
@@ -222,58 +223,6 @@ function! DetectOption(var, default)
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" FUNCTIONS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Execute cmd and get a result list of files + jump to a file by pressing "Enter"
-function! ExecSearch(cmd, action, err_file_fmt)
-    let cmd_output = system(a:cmd)
-
-    if cmd_output == ""
-        echohl WarningMsg | echomsg "Error: Nothing was found" | echohl None
-        return
-    endif
-
-    let tmpfile = ""
-    let old_verbose = &verbose
-
-    set verbose&vim
-
-    redir => tmpfile
-    silent echon '[Search cmd: ' . a:cmd . "]\n"
-    silent echon "[=====================================]\n"
-    silent echon cmd_output
-    redir END
-
-    let &verbose = old_verbose
-
-    let old_efm = &efm
-
-    if a:err_file_fmt == ""
-        set efm=%f:%\\s%#%l:%m
-    else
-        let &efm=a:err_file_fmt
-    endif
-
-    if v:version >= 700 && a:action == 'add'
-        caddexpr tmpfile
-    else
-        if exists(":cgetexpr")
-            cgetexpr tmpfile
-        else
-            cexpr tmpfile
-        endif
-    endif
-
-    let &efm = old_efm
-
-    botright copen
-
-    silent call matchadd('RedBg', "\\\\bug.*$")
-    silent call matchadd('YellowBg', "\\\\fixme.*$")
-    silent call matchadd('GreenBg', "\\\\todo.*$")
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ HexView() - Toggle hex view of the file
 """
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -290,23 +239,6 @@ function! HexView() "{{{
 
     execute l:cmd
 endfunction "}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Run() - runs executable
-"""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:make_prg = {}
-let s:make_prg['python'] = "python\\ %"
-let s:make_prg['rust'] = "rust\\ build\\ %"
-let s:errfmt = {}
-let s:errfmt['python'] = "\\ \\ File\\ \"%f\"\\,\\ line\\ %l\\,\\ in\\ %*[^\\,]\\,\\ %m"
-
-function! Run()
-    execute ":setlocal makeprg=".s:make_prg[&ft]
-    execute ":setlocal errorformat=".s:errfmt[&ft]
-    execute ":make"
-    execute ":loadview"
-endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """
@@ -327,158 +259,6 @@ function! RotateEnc() "{{{
         endif
     endwhile
 endfunction "}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Toggle_H_CPP() - Jump to source/header
-"""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! Toggle_H_CPP()
-"    execute ":mkview"
-"
-"    let l:projectPath = GetProjectParam(expand("%:p"), "Path")
-"    if l:projectPath == ""
-"        let l:projectPath = "."
-"    endif
-"
-"    let l:ext = ".".expand("%:e")
-"    let l:dirname = expand("%:p:h")
-"    let l:basename = substitute(system("basename ".expand("%:p")." ".l:ext), "\n", "", "g")
-"    let l:fname = l:dirname."/".l:basename
-"
-"    let l:ext = tolower(l:ext)
-"    "echo l:ext
-"
-"    let l:sourceExt = [".c", ".cc", ".cpp", ".cxx"]
-"    let l:headerExt = [".h", ".hpp"]
-"
-"    let l:new_ext = ""
-"    "if l:ext == "c" || l:ext == "cc" || l:ext == "cpp" || l:ext == "cxx"
-"    if index(l:sourceExt, l:ext) != -1
-"        let l:new_ext = "h"
-"
-"        " try to find the header that is located near the source
-"        for l:extension in l:headerExt
-"            if getftype(l:fname.l:extension) != ""
-"                execute "find ".l:fname.l:extension
-"                return
-"            endif
-"        endfor
-"
-"    elseif index(l:headerExt, l:ext) != -1
-"        let l:new_ext = "c"
-"
-"        " try to find the source that is located near the header
-"        for l:extension in l:sourceExt
-"            if getftype(l:fname.l:extension) != ""
-"                execute "find ".l:fname.l:extension
-"                return
-"            endif
-"        endfor
-"
-"    else
-"        return
-"    endif
-"
-"    let l:ignore_list = "(~|\.svn)"
-"    let l:cmd = "find ".l:projectPath."/ -name '".expand("%:t:r").".*' | egrep -v \"".l:ignore_list."\" | grep -i '\\.".l:new_ext."' | perl -ne 'print \"$.\\t$_\"'"
-"
-"    let l:list = system(l:cmd)
-"    let l:num = strlen(substitute(l:list, "[^\n]", "", "g"))
-"    if l:num < 1
-"        echo "'".a:name."' not found"
-"        return
-"    endif
-"
-"    if l:num != 1
-"        echo l:list
-"        let l:input = input("Which ? (CR=nothing)\n")
-"        if strlen(l:input) == 0
-"            return
-"        endif
-"        if strlen(substitute(l:input, "[0-9]", "", "g")) > 0
-"            echo "Not a number"
-"            return
-"        endif
-"        if l:input < 1 || l:input > l:num
-"            echo "Out of range"
-"            return
-"        endif
-"        let l:line = matchstr("\n".l:list, "\n".l:input."\t[^\n]*")
-"    else
-"        let l:line = l:list
-"    endif
-"
-"
-"    "let l:line = substitute(l:line, "^[^\t]*\t./", "", "")
-"    let l:line = substitute(l:line, "^[^\t]*\t", "", "")
-"
-"    """sf %:t:r.c
-"    execute "find ".l:line
-""    execute ":loadview"
-"endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" RunMake() - runs make
-"""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! RunMake()
-"    silent !/bin/sh -c '(make > /dev/null) 2> ./.make.out' &
-"    "silent !/bin/sh -c 'make -j3 | tee ./.build_out.orig' &
-"    "return ":Shell tail -f ./.make.out"
-"endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" ShowMakeResults()
-"""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! ShowMakeResults()
-
-    try
-        let l:make_out = system("/bin/sh -c \"tr -cd '\11\12\40-\176'\"")
-        cgetexpr l:make_out
-        copen 20
-    "catch /E484:/
-    catch
-        echo "File .make.out cannot be found"
-    finally
-        "asdfasdf
-    endtry
-
-    return
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" RunShellCommand()
-"""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
-    echo a:cmdline
-    let l:expanded_cmdline = a:cmdline
-    for part in split(a:cmdline, ' ')
-        if part[0] =~ '\v[%#<]'
-            let l:expanded_part = fnameescape(expand(part))
-            let l:expanded_cmdline = substitute(l:expanded_cmdline, part, l:expanded_part, '')
-        endif
-    endfor
-    botright new
-    let old_efm = &efm
-    set efm=%f:%\\s%#%l:%m
-    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-    call setline(1, 'You entered:    ' . a:cmdline)
-    call setline(2, 'Expanded Form:  ' .l:expanded_cmdline)
-    call setline(3, substitute(getline(2),'.','=','g'))
-    execute '$read !'. l:expanded_cmdline
-    setlocal nomodifiable
-    1
-endfunction
-
-
-" langmap
-"set langmap=├К├Г├Х├Л├Е├О├З├Ы├Э├Ъ├И├Я├Ж├Щ├Ч├Б├Р├Т├П├М├Д├Ц├Ь├С├Ю├У├Н├Й├Ф├Ш├В├А/├к├г├╡├л├еH├з├╗├╜├║├и├┐├ж├╣├╖├б├░├▓├п├м├д├╢├╝├▒├╛├│├н├й├┤├╕├в├а/;qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP[]ASDFGHJKL:'ZXCVBNM,./
-"set langmap='q,\,w,.e,pr,yt,fy,gu,ci,ro,lp,/[,=],aa,os,ed,uf,ig,dh,hj,tk,nl,s\\;,-',\\;z,qx,jc,kv,xb,bn,mm,w\,,v.,z/,[-,]=,\"Q,<W,>E,PR,YT,FY,GU,CI,RO,LP,?{,+},AA,OS,ED,UF,IG,DH,HJ,TK,NL,S:,_\",:Z,QX,JC,KV,XB,BN,MM,W<,V>,Z?
-set statusline=%<%f%h%m%r%=%b\ %{&encoding}\ 0x%B\ \ %l,%c%V\ %P
-
 
 """ Set colorscheme: {{{
 set background=light
@@ -504,31 +284,6 @@ set guifont=Monospace\ 14
 if &t_Co > 2 || has("gui_running")
     syntax on
     set hlsearch
-endif
-
-
-" if vim 7.3 and higher
-if v:version >= 703
-    set undodir=~/.vim/undo//
-    set backupdir=~/.vim/backup//
-    set directory=~/.vim/swap//
-
-    """ Set textwidth in ViewGrp
-"    set textwidth=90
-    set colorcolumn=+1
-    hi ColorColumn ctermbg=red guibg=lightgrey
-
-    set undofile
-else
-    """ highlight 91st column if the line exceeds 90 char width: {{{
-    highlight WidthStop ctermbg=green guibg=green
-    highlight AfterWidthStop ctermbg=black guibg=black
-    """}}}
-
-    """ track line length: {{{
-    au BufWinEnter * let w:m2=matchadd('WidthStop', '\%>90v.\+', -1)
-    au BufWinEnter * let w:m2=matchadd('AfterWidthStop', '\%>91v.\+', -1)
-    """}}}
 endif
 
 

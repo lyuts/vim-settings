@@ -8,12 +8,12 @@ let g:ale_linters = {
 " 'target': 'x86_64-unknown-hermit',
 
 let g:ale_rust_analyzer_config = {
-            \'cargoFeatures': {
+            \  'cargoFeatures': {
             \    'loadOutDirsFromCheck': v:true
-            \    },
-            \ 'cargo': {
-                \ 'runBuildScripts': v:true
-                \}
+            \  },
+            \  'cargo': {
+            \    'runBuildScripts': v:true
+            \  }
             \}
 
 let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }

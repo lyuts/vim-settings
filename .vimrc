@@ -77,6 +77,7 @@ Plugin 'vim-scripts/matchit.zip'
 Plugin 'vim-scripts/xml.vim'
 Plugin 'wting/rust.vim'
 Plugin 'xuhdev/vim-IniParser'
+Plugin 'vim-test/vim-test'
 
 call vundle#end()
 filetype plugin indent on     " required

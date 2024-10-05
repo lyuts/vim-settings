@@ -7,6 +7,7 @@ let g:ctrlp_custom_ignore = {
 
 let g:ctrlp_root_markers = [ 'vde.index', 'vde.tags' ]
 
-noremap <C-@> :CtrlPBuffer<CR>
+noremap <Leader>fb :CtrlPBuffer<CR>
+noremap <Leader><Space> :CtrlP<CR>
 
 "let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" '
